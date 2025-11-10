@@ -1,6 +1,7 @@
 package br.com.bes.gerenciadorusuario.controller
 
 import br.com.bes.gerenciadorusuario.model.Usuario
+import br.com.bes.gerenciadorusuario.repository.UsuarioRepository
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Controller
 import org.springframework.ui.Model
@@ -11,8 +12,8 @@ import org.springframework.web.bind.annotation.PostMapping
 
 class UsuarioController {
 
-//    @Autowired
-//    lateinit var repositorio: UsuarioRepository
+    @Autowired
+    lateinit var repositorio: UsuarioRepository
 
     // Função que vai abrir formulario
     @GetMapping("/formulario/cadastro") // Recebe as requisições GET
@@ -31,7 +32,7 @@ class UsuarioController {
     fun cadastrarUsuario(usuario: Usuario): String{
 
         println(usuario)
-
+        repositorio.save(usuario)
         return "home"
     }
 
