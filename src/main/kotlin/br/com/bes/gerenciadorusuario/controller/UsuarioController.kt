@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Controller
 import org.springframework.ui.Model
 import org.springframework.web.bind.annotation.GetMapping
+import org.springframework.web.bind.annotation.PathVariable
 import org.springframework.web.bind.annotation.PostMapping
 
 @Controller // Indica que a classe vai ser um controller.
@@ -43,5 +44,12 @@ class UsuarioController {
 
         model.addAttribute("usuarios", usuarios)
         return "home"
+    }
+
+    @GetMapping ("/excluir/{id}")
+    fun excluirUsuario(@PathVariable("id") id : Long): String{
+        
+
+        return "redirect:/home"
     }
 }
