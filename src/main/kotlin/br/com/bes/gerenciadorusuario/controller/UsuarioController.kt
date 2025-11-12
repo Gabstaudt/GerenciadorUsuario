@@ -48,7 +48,8 @@ class UsuarioController {
 
     @GetMapping ("/excluir/{id}")
     fun excluirUsuario(@PathVariable("id") id : Long): String{
-        
+
+        repositorio.deleteById(id)
 
         return "redirect:/home"
     }
