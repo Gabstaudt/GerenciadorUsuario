@@ -33,14 +33,15 @@ class UsuarioController {
 
         println(usuario)
         repositorio.save(usuario)
-        return "home"
+        return "redirect:/home"
     }
 
     @GetMapping("/home")
-    fun abrirHome():String{
+    fun abrirHome(model: Model):String{
 
         val usuarios = repositorio.findAll()
 
+        model.addAttribute("usuarios", usuarios)
         return "home"
     }
 }

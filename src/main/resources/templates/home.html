@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="pt-BR">
+<html lang="pt-BR" xmlns:th="http:/www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <title>Gerenciamento de usuarios</title>
@@ -28,11 +28,11 @@
         </tr>
         </thead>
         <tbody>
-        <tr>
-            <td>maria</td>
-            <td>maria@mail.com</td>
-            <td>123456789</td>
-            <td>Administrador</td>
+        <tr  th:each="user: ${usuarios}">
+            <td th: text="${user.nome}"> </td>
+            <td th: text="${user.email}"></td>
+            <td th: text="${user.cpf"></td>
+            <td th: text="${user.funcao}"> </td>
             <td>
                 <a href="#" class = "btn btn-primary"><i class="bi bi-pencil-fill"></i></a>
                 <a href="#" class = "btn btn-danger"><i class="bi bi-trash"></i></a>
