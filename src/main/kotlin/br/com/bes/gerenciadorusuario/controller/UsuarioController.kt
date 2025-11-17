@@ -8,60 +8,60 @@ import org.springframework.ui.Model
 import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.PathVariable
 import org.springframework.web.bind.annotation.PostMapping
+import org.springframework.web.bind.annotation.ModelAttribute
 
-@Controller // Indica que a classe vai ser um controller.
-
+@Controller
 class UsuarioController {
 
     @Autowired
     lateinit var repositorio: UsuarioRepository
 
-    // Função que vai abrir formulario
-    @GetMapping("/formulario/cadastro") // Recebe as requisições GET
+    // FORM CADASTRO (GET)
+    @GetMapping("/formulario/cadastro")
     fun abrirFormularioCadastro(model: Model): String {
-
-        // Cria objeto da classe Usuario vazio
         val usuario = Usuario()
-
-        // Faz o envio objeto da classe de dados para o HTML
         model.addAttribute("usuarioNovo", usuario)
         return "formulario-cadastro"
     }
 
-    // Função que vai receber o objeto de dados do HTML
-    @PostMapping ("/cadastrar")
-    fun cadastrarUsuario(usuario: Usuario): String{
-
+    // CADASTRAR (POST)
+    @PostMapping("/cadastrar")
+    fun cadastrarUsuario(@ModelAttribute("usuarioNovo") usuario: Usuario): String {
         println(usuario)
         repositorio.save(usuario)
         return "redirect:/home"
     }
 
+    // HOME (LISTAGEM)
     @GetMapping("/home")
-    fun abrirHome(model: Model):String{
-
+    fun abrirHome(model: Model): String {
         val usuarios = repositorio.findAll()
-
         model.addAttribute("usuarios", usuarios)
         return "home"
     }
 
-    @GetMapping ("/excluir/{id}")
-    fun excluirUsuario(@PathVariable("id") id : Long): String{
-
+    // EXCLUIR
+    @GetMapping("/excluir/{id}")
+    fun excluirUsuario(@PathVariable("id") id: Long): String {
         repositorio.deleteById(id)
-
         return "redirect:/home"
     }
 
-    @GetMapping ("/formulario/edicao/id")
-    fun abrirFormularioEdicao(@PathVariable("id") id: Long, model: Model) : String{
-
+    @GetMapping("/formulario/edicao/{id}")
+    fun abrirFormularioEdicao(@PathVariable("id") id: Long, model: Model): String {
         val usuario = repositorio.findById(id).orElse(null)
 
-        model.addAttribute("usuadioEdit", usuario)
+        if (usuario == null) {
+            return "redirect:/home"
+        }
 
+        model.addAttribute("usuarioEdit", usuario)
         return "formulario-edicao"
+    }
 
+    @PostMapping("/editar")
+    fun editarUsuario(@ModelAttribute("usuarioEdit") usuario: Usuario): String {
+        repositorio.save(usuario)
+        return "redirect:/home"
     }
 }
