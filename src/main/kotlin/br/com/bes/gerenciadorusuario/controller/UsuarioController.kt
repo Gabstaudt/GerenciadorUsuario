@@ -53,4 +53,15 @@ class UsuarioController {
 
         return "redirect:/home"
     }
+
+    @GetMapping ("/formulario/edicao/id")
+    fun abrirFormularioEdicao(@PathVariable("id") id: Long, model: Model) : String{
+
+        val usuario = repositorio.findById(id).orElse(null)
+
+        model.addAttribute("usuadioEdit", usuario)
+
+        return "formulario-edicao"
+
+    }
 }
