@@ -59,11 +59,10 @@ class UsuarioController {
         return "formulario-edicao"
     }
 
-    @PostMapping("/editar/{id}")
-    fun editarUsuario(usuario : Usuario, @PathVariable("id") id: Long): String {
-
-        usuario.id=id
+    @PostMapping("/editar")
+    fun editarUsuario(@ModelAttribute("usuarioEdit") usuario: Usuario): String {
         repositorio.save(usuario)
         return "redirect:/home"
     }
+
 }
