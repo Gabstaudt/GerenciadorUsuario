@@ -13,7 +13,11 @@
     <h2>Formulário de Edição</h2>
 
     <!-- objeto e action com thymeleaf -->
-    <form th:object="${usuarioEdit}" th:action="@{/editar}" method="post">
+    <form th:object="${usuarioEdit}" th:action="@{/editar}" method="post"
+            >
+
+
+
 
         <!-- id oculto para conseguir atualizar o registro correto -->
         <input type="hidden" th:field="*{id}"/>
