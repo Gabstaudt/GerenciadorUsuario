@@ -31,8 +31,17 @@
             <td th:text="${user.cpf}"></td>
             <td th:text="${user.funcao}"></td>
             <td>
-                <a href="@{/formulario/edicao/{id}(id= ${user.id})}" class="btn btn-primary btn-sm"><i class="bi bi-pencil-fill"></i></a>
-                <a th:href="@{/excluir/{id}(id = {user.id})}" class="btn btn-danger btn-sm"><i class="bi bi-trash"></i></a>
+                <!-- EDITAR -->
+                <a th:href="@{/formulario/edicao/{id}(id=${user.id})}"
+                   class="btn btn-primary btn-sm">
+                    <i class="bi bi-pencil-fill"></i>
+                </a>
+
+                <!-- EXCLUIR -->
+                <a th:href="@{/excluir/{id}(id=${user.id})}"
+                   class="btn btn-danger btn-sm">
+                    <i class="bi bi-trash"></i>
+                </a>
             </td>
         </tr>
         </tbody>
